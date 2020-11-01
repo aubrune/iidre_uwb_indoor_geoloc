@@ -6,24 +6,36 @@ class UwbXyzPublisher(object):
     def __init__(self):
         rospy.init_node("iidre_uwb_wyz_publisher")
         self.tfb = TransformBroadcaster()
+        self.serial = None
         self.device_name = rospy.get_param("name", "uwb")
         self.device_port = rospy.get_param("port", "/dev/ttyACM0")
         self.device_frame_id = rospy.get_param("frame_id", "map")
         self.publish_anchors = rospy.get_param("publish_anchors", True)
     
     def connect(self):
+        if self.serial is not None:
+            try:
+                self.serial.close()
+            except:
+                pass
+        
         rospy.loginfo("Connecting to {}...".format(self.device_port))
         self.serial = serial.Serial(self.device_port)
         rospy.loginfo("Connected! Now publishing tf frame '{}' in frame '{}'...".format(self.device_name, self. device_frame_id))
 
     def run(self):
         while not rospy.is_shutdown():
-            line = self.serial.readline().decode("ascii")
             try:
+                line = self.serial.readline().decode("ascii")
                 self.parse_and_publish(line)
             except (ValueError, IndexError):
                 # Ignore the frame in case of any parsing error
                 rospy.loginfo("Error when parsing a frame from serial")
+            except serial.serialutil.SerialException:
+                rospy.logwarn("Device disconnection, retrying...")
+                rospy.sleep(2)
+                self.connect()
+                
 
     def parse_and_publish(self, line):
         fb = line.split(":")
