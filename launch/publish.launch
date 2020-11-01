@@ -1,0 +1,12 @@
+<launch>
+    <arg name="port" default="/dev/ttyACM0" />
+    <arg name="name" default="uwb" />
+    <arg name="frame_id" default="map" />
+    
+    <param name="device_port" value="$(arg port)" />
+    <param name="device_name" value="$(arg name)" />
+    <param name="device_frame_id" value="$(arg frame_id)" />
+
+    <node name="iidre_$(arg name)_xyz_publisher" pkg="iidre_uwb_indoor_geoloc" type="publisher.py"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find iidre_uwb_indoor_geoloc)/launch/uwb.rviz" />
+</launch>

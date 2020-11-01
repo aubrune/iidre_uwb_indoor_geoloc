@@ -5,6 +5,8 @@
   <description>Indoor geolocalisation with Ultra wideband (UWB) sensors from IIDRE</description>
 
   <maintainer email="dev@ros4.pro">Yoan Mollard</maintainer>
+  <maintainer email="tech@iidre.com">IIDRE</maintainer>
+
   <license>CeCILL</license>
 
   <url type="website">https://www.iidre.com/en</url>

@@ -13,7 +13,9 @@ ROS 1 package for Indoor geolocalisation with Ultra wideband (UWB) anchors from 
 7. In the UWB Supervisor, check that the top view of the map looks correct, in temrs of achors (black points) and sensor (red point)
 
 ### Part B: Publish to ROS
-
+```bash
+roslaunch iidre_uwb_indoor_geoloc publish.launch
+```
 
 ## Build notepad for Ubuntu
 ### Error `Unknown module(s) in QT: serialport`
