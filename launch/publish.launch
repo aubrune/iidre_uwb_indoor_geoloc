@@ -2,10 +2,13 @@
     <arg name="port" default="/dev/ttyACM0" />
     <arg name="name" default="uwb" />
     <arg name="frame_id" default="map" />
+    <arg name="publish_anchors" default="True" />
 
     <param name="port" value="$(arg port)" />
     <param name="name" value="$(arg name)" />
     <param name="frame_id" value="$(arg frame_id)" />
+    <param name="publish_anchors" value="$(arg publish_anchors)" />
+
     <node name="iidre_$(arg name)_xyz_publisher" pkg="iidre_uwb_indoor_geoloc" type="publisher.py" output="screen"/>
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find iidre_uwb_indoor_geoloc)/launch/uwb.rviz" />
 </launch>

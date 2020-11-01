@@ -9,6 +9,7 @@ class UwbXyzPublisher(object):
         self.device_name = rospy.get_param("name", "uwb")
         self.device_port = rospy.get_param("port", "/dev/ttyACM0")
         self.device_frame_id = rospy.get_param("frame_id", "map")
+        self.publish_anchors = rospy.get_param("publish_anchors", True)
     
     def connect(self):
         rospy.loginfo("Connecting to {}...".format(self.device_port))
@@ -36,6 +37,14 @@ class UwbXyzPublisher(object):
             anchor_id = fb_data[1]
             anchor_dist = fb_data[2]
             anchor_xyz = fb_data[3:6]
+            ax_m, ay_m, az_m = map(lambda x: float(x)/100, anchor_xyz)
+
+            if self.publish_anchors:
+                self.tfb.sendTransform(
+                    (ax_m, ay_m, az_m), (0, 0, 0, 1),   # device position, quaternion
+                    rospy.Time.now(),
+                    anchor_id,
+                    self.device_frame_id)   
         
         elif fb_cmd == "+MPOS":
             # This is usable if device has been preconfigured with the uwbSupervisor
