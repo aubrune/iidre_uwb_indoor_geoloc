@@ -40,8 +40,8 @@ class UwbXyzPublisher(object):
         elif fb_cmd == "+MPOS":
             # This is usable if device has been preconfigured with the uwbSupervisor
             x, y, z = fb_data[1:4]
-            # Convert into metric system
-            x_m, y_m, z_m = map(lambda x: float(x)/1000, [x, y, z])
+            # Convert from centimeters (in the JSON infra file) to meters
+            x_m, y_m, z_m = map(lambda x: float(x)/100, [x, y, z])
 
             self.tfb.sendTransform(
                 (x_m, y_m, z_m), (0, 0, 0, 1),   # device position, quaternion
