@@ -1,5 +1,5 @@
 # iidre_uwb_indoor_geoloc
-ROS 1 package for Indoor geolocalisation with Ultra wideband (UWB) anchors from IIDRE
+ROS 1 package for **Indoor Geolocalisation** with Ultra wideband (UWB) anchors from [IIDRE](https://www.iidre.com/en/).
 
 ## Quickstart
 ### Part A: Configure anchors and create the map
@@ -12,8 +12,14 @@ ROS 1 package for Indoor geolocalisation with Ultra wideband (UWB) anchors from 
 7. In the uwbSupervisor, check that the top view of the map looks correct, in temrs of achors (black points) and sensor (red point)
 
 ### Part B: Publish to ROS
+Just launch the following:
 ```bash
 roslaunch iidre_uwb_indoor_geoloc publish.launch
+```
+
+If you use several sensors you may customize the USB port, world frame id, child frame id, with optional parameters:
+```bash
+roslaunch iidre_uwb_indoor_geoloc publish.launch publish_anchors:=false name:=robot frame_id:=base_link
 ```
 
 ## Build notepad for Ubuntu
