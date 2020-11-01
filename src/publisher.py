@@ -4,7 +4,7 @@ from tf import TransformBroadcaster
 
 class UwbXyzPublisher(object):
     def __init__(self):
-        rospy.init_node("iidre_uwb_wyz_publisher")
+        rospy.init_node("iidre_uwb_xyz_publisher")
         self.tfb = TransformBroadcaster()
         self.serial = None
         self.device_name = rospy.get_param("name", "uwb")
