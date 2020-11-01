@@ -1,6 +1,8 @@
 # iidre_uwb_indoor_geoloc
 ROS 1 package for **Indoor Geolocalisation** with Ultra wideband (UWB) anchors from [IIDRE](https://www.iidre.com/en/).
 
+![Moving sensor with 4 anchors in RViz](https://raw.githubusercontent.com/aubrune/iidre_uwb_indoor_geoloc/master/doc/img/uwb-rviz.gif)
+
 ## Quickstart
 ### Part A: Configure anchors and create the map
 1. Connect an UWB sensor to an USB port of your ROS computer
