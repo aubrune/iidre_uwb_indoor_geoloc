@@ -8,18 +8,18 @@ ROS 1 package for **Indoor Geolocalisation** with Ultra wideband (UWB) anchors f
 1. Connect an UWB sensor to an USB port of your ROS computer
 2. Power up at least 4 UWB anchors through MicroUSB and place them at the edges of a room (make it easy to measure distances between them)
 3. Build & launch [uwbSupervisor](https://github.com/IIDRE/uwbSupervisor), you should see realtime distance data from the 4 anchors and an incorrect map of them 
-4. Click `Impart infra (flash)` and save the infra file with the `.json` extension
+4. Click `Import infra (flash)` and save the infra file with the `.json` extension
 5. Manually open the previous infra JSON file, decide of a world frame in the room and measure distances between anchors to update `X, Y, Z` positions of anchors (in centimeters)
 6. Click `Export infra (flash)`, select the edited infra JSON file, and wait a few dozens of seconds for the modal message "export positions: 4"
-7. In the uwbSupervisor, check that the top view of the map looks correct, in temrs of achors (black points) and sensor (red point)
+7. In the uwbSupervisor, check that the top view of the map looks correct, in terms of anchors (black points) and sensor (red point)
 
 ### Part B: Publish to ROS
-Just launch the following:
+Launch the UWB publisher:
 ```bash
 roslaunch iidre_uwb_indoor_geoloc publish.launch
 ```
 
-If you use several sensors you may customize the USB port, world frame id, child frame id, with optional parameters:
+If you use several sensors, you may customize the USB port, world frame id, child frame id, with optional parameters:
 ```bash
 roslaunch iidre_uwb_indoor_geoloc publish.launch publish_anchors:=false name:=robot frame_id:=base_link
 ```
